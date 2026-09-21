@@ -1,0 +1,19 @@
+{
+  "name": "niklas-skills",
+  "version": "0.1.0",
+  "description": "Practical Claude Code skills built in day-to-day work and generalized for reuse",
+  "author": {
+    "name": "Niklas Buschner",
+    "url": "https://github.com/niklas-radyant"
+  },
+  "repository": "https://github.com/niklas-radyant/claude-skills",
+  "license": "MIT",
+  "keywords": [
+    "code-review",
+    "pull-request",
+    "pre-commit",
+    "ci",
+    "git",
+    "quality-gate"
+  ]
+}

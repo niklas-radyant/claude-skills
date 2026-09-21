@@ -1,0 +1,31 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "niklas-skills",
+  "description": "Practical Claude Code skills built in day-to-day work and generalized for reuse",
+  "owner": {
+    "name": "Niklas Buschner",
+    "url": "https://github.com/niklas-radyant"
+  },
+  "plugins": [
+    {
+      "name": "niklas-skills",
+      "source": "./",
+      "description": "Practical Claude Code skills built in day-to-day work and generalized for reuse. Currently: pr-preflight, an adversarial self-review pass that runs before you open a pull request.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Niklas Buschner",
+        "url": "https://github.com/niklas-radyant"
+      },
+      "license": "MIT",
+      "category": "productivity",
+      "homepage": "https://github.com/niklas-radyant/claude-skills",
+      "keywords": [
+        "code-review",
+        "pull-request",
+        "ci",
+        "git",
+        "quality-gate"
+      ]
+    }
+  ]
+}
