@@ -1,6 +1,6 @@
 {
   "name": "pr-workflow",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Skills for the work around a pull request: reviewing your own diff before you open it, and running the gates the repo's own CI runs.",
   "author": {
     "name": "Niklas Buschner",
