@@ -3,6 +3,10 @@
 Skills I built while shipping real work, generalized so they're useful
 outside the repo they came from. Install only the ones you want.
 
+Each one started as an internal skill in the production codebase at
+[Radyant](https://radyant.io) and earned its place there before it landed
+here — then got stripped of everything specific to that repo.
+
 MIT licensed. No attribution required.
 
 ## Install
@@ -42,6 +46,10 @@ Code.
 ### `pr-preflight`
 
 **Review your own diff before the PR opens, not after.**
+
+Runs on every substantive PR at Radyant, where it also drives our automated
+review tiering — the stamp mechanism described below is in production, not a
+proposal.
 
 ```bash
 /plugin install pr-workflow@niklas-skills
