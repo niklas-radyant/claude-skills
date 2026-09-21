@@ -79,10 +79,15 @@ order and stop once you have the actual commands:
    `.buildkite/`. Read the jobs that fire on pull requests and copy the
    exact commands. If the repo documents which checks are *required*, those
    are the gates that matter; the rest are advisory.
-2. **An aggregate script**, if one exists — `npm run check`, `make check`,
+2. **An aggregate script**, if one exists — `<pm> run check`, `make check`,
    `just check`, `tox`, `nox`, `./scripts/verify.sh`. A repo that maintains
    one usually intends it as "what CI runs". Prefer it over assembling the
-   pieces yourself.
+   pieces yourself — but **read what it chains together first.** Aggregates
+   routinely bundle a step that isn't safe to run here (a link checker that
+   fetches, a deploy, an integration suite). When one does, run the
+   hermetic pieces individually and report the step you left out. An
+   aggregate is a convenience, not a license to skip the judgment in the
+   next paragraph.
 3. **Manifest scripts** — `package.json` → `scripts`; `Makefile` targets;
    `pyproject.toml`; `Cargo.toml`; `Taskfile.yml`; `Rakefile`; `mix.exs`;
    `composer.json`; `deno.json`.
@@ -90,6 +95,18 @@ order and stop once you have the actual commands:
    These are gates too; they fire on the contributor's machine.
 5. **Contributor docs** — `CONTRIBUTING.md`, `AGENTS.md`, `CLAUDE.md`, and
    the README's development section.
+
+**Use the repo's toolchain, not your habits.** In a JS/TS repo the lockfile
+decides which package manager to invoke — `pnpm-lock.yaml` → `pnpm`,
+`yarn.lock` → `yarn`, `bun.lockb` → `bun`, `package-lock.json` → `npm`:
+
+```bash
+ls pnpm-lock.yaml yarn.lock bun.lockb package-lock.json 2>/dev/null
+```
+
+The wrong one can resolve different versions than CI will, or fail outright
+on a lockfile it doesn't read. The same caution applies elsewhere: prefer
+`uv`/`poetry`/`pdm` where the repo has that lockfile rather than bare `pip`.
 
 Then run them. Two rules about what to actually run:
 
