@@ -1,95 +1,129 @@
 # Claude Code skills
 
-A small, growing collection of [Claude Code](https://claude.com/claude-code)
-skills I built while shipping real work, then generalized so they're useful
-outside the repo they came from. Free to use, copy, fork, or ignore.
+Skills I built while shipping real work, generalized so they're useful
+outside the repo they came from. Install only the ones you want.
 
-Each skill here earned its place by being run repeatedly, not by sounding
-like a good idea. When one stops being useful I'll remove it.
+MIT licensed. No attribution required.
 
 ## Install
 
 ```bash
 /plugin marketplace add niklas-radyant/claude-skills
-/plugin install niklas-skills
 ```
 
-Skills then appear as `niklas-skills:<name>` and activate when a task
-matches their description — or you can invoke one directly, e.g.
-`/pr-preflight`.
+Then install whichever plugin you want:
 
-Prefer not to use plugins? Every skill is a self-contained directory. Copy
-the one you want into your own `.claude/skills/`:
+```bash
+/plugin install pr-workflow@niklas-skills
+```
+
+Skills activate on their own when a task matches, or you can call one
+directly — `/pr-preflight`.
+
+**Not using plugins?** Every skill is a self-contained directory. Copy the
+one you want:
 
 ```bash
 git clone https://github.com/niklas-radyant/claude-skills.git
-cp -r claude-skills/skills/pr-preflight ~/.claude/skills/
+cp -r claude-skills/plugins/pr-workflow/skills/pr-preflight ~/.claude/skills/
 ```
 
-That also works for other agent tools that read `SKILL.md` files.
+That works for any agent tool that reads `SKILL.md` files, not just Claude
+Code.
 
-## What's in here
+## The skills
+
+| Skill | Plugin | What it does |
+|---|---|---|
+| [`pr-preflight`](#pr-preflight) | `pr-workflow` | Reviews your own diff adversarially before you open the PR, runs the gates your CI runs, fixes what it finds |
+
+---
 
 ### `pr-preflight`
 
-Review your own diff adversarially **before** opening a pull request, run
-the gates the repo's own CI runs, fix what you find, and open the PR clean.
+**Review your own diff before the PR opens, not after.**
 
-The premise: a review finding is cheapest while the branch is still yours.
-Once the PR is open, a fix means another push, another review cycle, and a
-race against auto-merge — and reviewers who routinely receive obvious
-problems learn to skim.
+```bash
+/plugin install pr-workflow@niklas-skills
+```
 
-What makes it work in an unfamiliar repo is that it **discovers** the gates
-instead of assuming them. It reads the CI config first, because CI is the
-source of truth for what actually blocks a PR, then falls back to aggregate
-scripts, manifest scripts, and hook config. It runs what's fast and
-hermetic, refuses to run what needs credentials or a live database, and
-reports what it skipped rather than implying it passed.
+A review finding is cheapest while the branch is still yours. Once the PR is
+open, a fix means another push, another review cycle, and a race against
+auto-merge — and reviewers who routinely receive obvious problems learn to
+skim the non-obvious ones.
 
-It ships two reference files, loaded only when relevant:
+So it does the pass first. It establishes the real base branch (the one the
+PR actually targets, not whatever `main` happens to be), reads the diff,
+reviews it as an adversary rather than as the author, runs the repo's gates,
+fixes the blocking findings, and reports what it skipped.
 
-- `reference/stack-checklists.md` — the defects that recur per ecosystem
-  (JS/TS, Python, Go, Rust, SQL and migrations, CI workflows, shell,
-  dependency changes).
-- `reference/ci-stamp-recipe.md` — optional. If your repo runs an automated
-  AI review on every PR, this is the pattern for routing author-reviewed PRs
-  to a cheaper verification pass instead of a full discovery pass, with the
-  design rules that keep it honest and a worked GitHub Actions example.
+The part that makes it work in a repo it wasn't written for: **it discovers
+the gates instead of assuming them.** It reads your CI config first, on the
+principle that CI is the source of truth for what actually blocks a PR, then
+falls back to aggregate scripts (`make check`, `tox`), manifest scripts, and
+hook config. It runs what's fast and hermetic, refuses to run what needs
+credentials or a live database, and names every gate it skipped rather than
+letting silence imply it passed.
 
-The stamp is opt-in and self-detecting: the skill greps your CI for the
-convention and only stamps if something actually reads it. In a repo that
-doesn't, you get the review pass and no inert boilerplate in your PR body.
+Two reference files, loaded only when relevant:
+
+- **`reference/stack-checklists.md`** — the defects that recur per ecosystem:
+  JS/TS, Python, Go, Rust, SQL and migrations, CI workflows, shell,
+  dependency changes.
+- **`reference/ci-stamp-recipe.md`** — optional. If you run an automated AI
+  review on every PR, this is the pattern for routing author-reviewed PRs to
+  a cheap verification pass instead of a full discovery pass: the four design
+  rules that keep it honest, and a worked GitHub Actions example.
+
+That second one is the piece most worth stealing if you're paying for AI
+review. The short version: discovery is the expensive job, verification is
+not, and a PR whose author already did a full pass needs the second one. The
+author's session marks the PR with `Preflight-Reviewed: <head SHA>`, and CI
+routes on it — but sensitive paths always keep the deep review regardless
+(an author-side review is not independent), the stamp never skips review
+entirely, anything ambiguous fails safe to deep, and pinning the exact SHA
+means a stamp can only ever vouch for code that existed when it was written.
+Those four rules together are what make it safe to trust a self-asserted
+claim at all: the worst case for a forged stamp is a non-sensitive PR getting
+the cheap reviewer instead of the expensive one.
+
+The stamp is opt-in and self-detecting — the skill greps your CI for the
+convention and only stamps if something actually reads it, so in a repo that
+doesn't, you get the review pass and no dead boilerplate in your PR body.
+
+---
 
 ## How I write these
 
-In case it's useful if you're writing your own, or want to know what to
-expect from mine:
+In case you're writing your own, and so you know what to expect from mine:
 
 - **Procedures, not vibes.** A skill should say what to do in what order,
   with the commands. "Be careful about security" changes nothing.
-- **Discover, don't assume.** A skill that hard-codes `npm run lint` works
-  in one repo. One that reads the repo's CI works everywhere. This is
-  usually the difference between a personal shortcut and something shareable.
-- **Progressive disclosure.** The main `SKILL.md` stays readable; detail
-  moves into `reference/` files loaded on demand. Every token in a skill body
-  is a token the model reads on every invocation.
-- **State the failure modes.** What the skill does *not* do, and where it
-  can be wrong, belongs in the skill. A skill that oversells itself gets
-  trusted in situations it can't handle.
-- **No house rules.** Anything true only of my employer's codebase got
-  stripped or turned into a documented option.
+- **Discover, don't assume.** A skill that hard-codes `npm run lint` works in
+  one repo. One that reads the repo's CI works everywhere. This is usually
+  the whole difference between a personal shortcut and something shareable.
+- **Progressive disclosure.** The main `SKILL.md` stays readable; detail goes
+  into `reference/` files loaded on demand. Every token in a skill body is a
+  token the model reads on every single invocation.
+- **State the failure modes.** What the skill does *not* do, and where it can
+  be wrong, belongs in the skill. A skill that oversells itself gets trusted
+  in situations it can't handle.
+- **Earn it in use.** Skills here have been run repeatedly on real work and
+  fixed where they broke. When one stops being useful I'll remove it.
 
 ## Contributing
 
-Issues and PRs are welcome — particularly stack checklist entries for
-ecosystems I don't work in daily, and reports of where a skill misfires in
-a repo shaped differently from mine.
+See [CONTRIBUTING.md](CONTRIBUTING.md) — it has the layout, a
+[skill template](templates/SKILL.md), and the bar for what gets in.
 
-I'm keeping the collection deliberately small, so I may decline a skill
-that's useful but that I won't personally maintain.
+Reports of a skill misfiring in a repo shaped differently from mine are the
+most useful thing you can send me; that's the failure mode I can't test for
+myself.
+
+```bash
+python3 scripts/validate.py
+```
 
 ## License
 
-MIT — see [LICENSE](LICENSE). Use it commercially, modify it, no attribution
-required (though it's appreciated).
+[MIT](LICENSE).

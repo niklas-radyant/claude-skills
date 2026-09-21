@@ -1,7 +1,7 @@
 {
-  "name": "niklas-skills",
+  "name": "pr-workflow",
   "version": "0.1.0",
-  "description": "Practical Claude Code skills built in day-to-day work and generalized for reuse",
+  "description": "Skills for the work around a pull request: reviewing your own diff before you open it, and running the gates the repo's own CI runs.",
   "author": {
     "name": "Niklas Buschner",
     "url": "https://github.com/niklas-radyant"
@@ -11,9 +11,8 @@
   "keywords": [
     "code-review",
     "pull-request",
-    "pre-commit",
-    "ci",
     "git",
+    "ci",
     "quality-gate"
   ]
 }
