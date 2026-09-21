@@ -82,7 +82,12 @@ order and stop once you have the actual commands:
 2. **An aggregate script**, if one exists — `<pm> run check`, `make check`,
    `just check`, `tox`, `nox`, `./scripts/verify.sh`. A repo that maintains
    one usually intends it as "what CI runs". Prefer it over assembling the
-   pieces yourself.
+   pieces yourself — but **read what it chains together first.** Aggregates
+   routinely bundle a step that isn't safe to run here (a link checker that
+   fetches, a deploy, an integration suite). When one does, run the
+   hermetic pieces individually and report the step you left out. An
+   aggregate is a convenience, not a license to skip the judgment in the
+   next paragraph.
 3. **Manifest scripts** — `package.json` → `scripts`; `Makefile` targets;
    `pyproject.toml`; `Cargo.toml`; `Taskfile.yml`; `Rakefile`; `mix.exs`;
    `composer.json`; `deno.json`.
