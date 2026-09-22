@@ -126,6 +126,10 @@ taking PRs. Fork it, copy a skill out of it, rewrite whatever doesn't fit
 how you work — that's what the MIT license is for, and no attribution is
 needed.
 
+One exception: if a skill **misfires** in a repo shaped differently from
+mine, please open an issue. That's the failure mode I can't test for
+myself, and it's how both bugs fixed so far were found.
+
 ## License
 
 [MIT](LICENSE).
