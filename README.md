@@ -1,7 +1,7 @@
 # Claude Code skills
 
-Skills I built while shipping real work, generalized so they're useful
-outside the repo they came from. Install only the ones you want.
+Claude skills I built to make my life easier, packaged to be shared and
+hopefully be beneficial to others.
 
 Each one started as an internal skill in the production codebase at
 [Radyant](https://radyant.io) and earned its place there before it landed
@@ -119,18 +119,12 @@ In case you're writing your own, and so you know what to expect from mine:
 - **Earn it in use.** Skills here have been run repeatedly on real work and
   fixed where they broke. When one stops being useful I'll remove it.
 
-## Contributing
+## Pull requests
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) — it has the layout, a
-[skill template](templates/SKILL.md), and the bar for what gets in.
-
-Reports of a skill misfiring in a repo shaped differently from mine are the
-most useful thing you can send me; that's the failure mode I can't test for
-myself.
-
-```bash
-python3 scripts/validate.py
-```
+This is my personal toolbox rather than a community project, so I'm not
+taking PRs. Fork it, copy a skill out of it, rewrite whatever doesn't fit
+how you work — that's what the MIT license is for, and no attribution is
+needed.
 
 ## License
 
