@@ -106,6 +106,28 @@ doesn't, you get the review pass and no dead boilerplate in your PR body.
 
 ### `afk`
 
+```text
+▄▀█ █▀▀ █▄▀
+█▀█ █▀  █ █
+
+plan with me. then don't ask me anything.
+
+PLAN  you're here      GO  you're away        LEARN  you're back
+┌────────────────────┐ ┌────────────────────┐ ┌──────────────────┐
+│ align deeply       │ │ build a slice      │ │ your corrections │
+│ write a contract   │▶│ verify for real    │▶│ become rules     │
+│ clear blockers     │ │ 3 reviewers judge  │ │ for the next run │
+└────────────────────┘ │ log every decision │ └──────────────────┘
+                       └────────────────────┘
+
+reviewers, each with fresh context
+├─ design critic     takes its own screenshots
+├─ seat walker       opens it cold, as the real user
+└─ vision guardian   scope, taste, was it really verified
+
+$ /plugin install autonomous-work@niklas-skills
+```
+
 **Plan with me, then don't ask me anything until it's done.**
 
 ```bash
