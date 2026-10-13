@@ -17,6 +17,8 @@ the code or the plan.
 - the URLs, with the states to open
 - the seat
 
+**Never change data.** You run in parallel with other reviewers against the same app. Open states only through the URLs and read-only clicks you were given (`--click` to open a modal or tab, never to save, delete or submit). If a state you need isn't prepared, report it as untested instead of creating it.
+
 ## Load first
 1. The owner's profile (`<repo>/.claude/afk/profile.md`, or
    `~/.claude/afk/profile.md`).

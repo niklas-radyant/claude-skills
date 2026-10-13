@@ -144,6 +144,14 @@ Runs locally (keep the machine awake) or in a cloud session;
 `reference/cloud.md` covers what a fresh clone needs, including reaching a
 Postgres database through an HTTPS-only proxy.
 
+**Status: early (0.1.0).** It came out of one real production run, plus
+end-to-end runs in an unrelated stdlib Python app. In those runs it fired from
+a plain sentence, ran two slices with all three reviewers, logged nine
+decisions, wrote the handback, and closed the run. The guard hooks blocked a
+push, and the stop gate kept the session working until the done criteria
+were met. The interactive plan phase has only run in real use so far.
+Issues from repos shaped differently are especially welcome.
+
 **Limits.** The reviewers are as good as your profile — measure them with the
 backtest. A miscalibrated critic flags too much before it flags too little,
 which is why its verdict is capped by a "first reaction" and slices stop after

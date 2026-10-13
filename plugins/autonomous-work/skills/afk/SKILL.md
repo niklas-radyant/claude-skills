@@ -115,7 +115,10 @@ the time here; an hour of alignment saves a day of rework.
 2. **Verify for real.** Run the tests, then the real flow the way its user
    would, with real data, in every state, including paid runs the slice needs.
    Write the walk to `verify-<n>.md`. "Tests pass" is not verified.
-3. **Review gate.** Start the three reviewer agents in parallel:
+3. **Review gate.** Start the three reviewer agents in parallel. Installed as
+   a plugin, their agent types are namespaced:
+   `autonomous-work:afk-design-critic` and so on. Use whichever name your
+   agent list shows.
    - `afk-design-critic`: calm, bloat, reuse, consistency. It takes its own
      screenshots.
    - `afk-seat-walker`: cold open and the real moments from the user's seat.
@@ -124,6 +127,12 @@ the time here; an hour of alignment saves a day of rework.
 
    Pass them the run dir, the slice, the URLs or commands with the states to
    open, and the seat. Never pass your own reasoning; they judge the result.
+   - **Prepare every state first.** Reviewers run in parallel and must never
+     change data. If a state needs data (empty, all done, 20+ items), set it
+     up beforehand: a separate data file, fixture or port per state. Then
+     hand them URLs that open each state without any clicks that write.
+   - **A slice with no visible change** (API only, refactor) gets only the
+     vision guardian. The other two review it with the next visible slice.
 4. **Act.**
    - Fix every BLOCKER and MAJOR.
    - Remove whatever on the critic's removal list you can't defend in one
