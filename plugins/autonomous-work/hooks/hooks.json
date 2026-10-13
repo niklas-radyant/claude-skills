@@ -1,0 +1,16 @@
+{
+  "description": "AFK-run guard rails. Every hook is a no-op unless <repo>/.afk/ACTIVE exists, i.e. only while an /afk run is going.",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "AskUserQuestion|EnterPlanMode|ExitPlanMode|Bash",
+        "hooks": [{ "type": "command", "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/afk-guard.sh\"", "timeout": 10 }]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [{ "type": "command", "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/afk-stop-gate.sh\"", "timeout": 10 }]
+      }
+    ]
+  }
+}
