@@ -19,6 +19,7 @@ Then install whichever plugin you want:
 
 ```bash
 /plugin install pr-workflow@niklas-skills
+/plugin install autonomous-work@niklas-skills
 ```
 
 Skills activate on their own when a task matches, or you can call one
@@ -40,6 +41,8 @@ Code.
 | Skill | Plugin | What it does |
 |---|---|---|
 | [`pr-preflight`](#pr-preflight) | `pr-workflow` | Reviews your own diff adversarially before you open the PR, runs the gates your CI runs, fixes what it finds |
+| [`afk`](#afk) | `autonomous-work` | Aligns deeply with you, then runs a work package to an agreed milestone on its own, with independent reviewers instead of check-ins |
+| [`taste-profile`](#taste-profile) | `autonomous-work` | Mines your own transcripts for how you judge work, writes it down, and proves it with a blind backtest |
 
 ---
 
@@ -98,6 +101,68 @@ the cheap reviewer instead of the expensive one.
 The stamp is opt-in and self-detecting — the skill greps your CI for the
 convention and only stamps if something actually reads it, so in a repo that
 doesn't, you get the review pass and no dead boilerplate in your PR body.
+
+---
+
+### `afk`
+
+**Plan with me, then don't ask me anything until it's done.**
+
+```bash
+/plugin install autonomous-work@niklas-skills
+```
+
+Long autonomous runs fail in two ways: the agent stops to ask about something
+it could have decided, or it decides something it shouldn't have — bloats a
+screen, drifts from what the product is for, does something irreversible —
+and you come back to rework. "Don't ask, but build what I'd want" fixes
+neither, because the model that builds also grades its own work.
+
+`/afk` is one command with three phases, picked from the run's state:
+
+- **plan** (you're there): it walks today's flow first and opens with a
+  concrete critique, keeps one living plan page, builds clickable mockups of
+  every state in your product's real look, asks the forks in deep rounds, and
+  writes a contract — done criteria you can check, what's out of scope, what
+  it may do unattended. A preflight clears everything that would interrupt the
+  run (secrets, logins, the dev server) while you're still at the keyboard.
+- **go** (you're away): slice by slice — build, verify for real, then three
+  **independent reviewer agents** with fresh context judge the result: a
+  design critic (takes its own screenshots), a seat walker (cold open as the
+  actual user), a vision guardian (scope, your engineering taste, whether
+  verification really happened). Forks the contract didn't settle are decided
+  by a written rule and logged, or parked for you. The plugin's hooks block
+  questions, prompting CLIs, PRs and stopping early while a run is active.
+- **learn** (after your review): your corrections become rules for next time.
+
+It needs two files the other skill helps you write: your **profile** (how you
+judge, in general) and a per-repo **adapter** (where the vision lives,
+reference screens, how to verify, what to park). Without them the reviewers
+judge by generic taste — which is the thing you're trying to get away from.
+
+Runs locally (keep the machine awake) or in a cloud session;
+`reference/cloud.md` covers what a fresh clone needs, including reaching a
+Postgres database through an HTTPS-only proxy.
+
+**Limits.** The reviewers are as good as your profile — measure them with the
+backtest. A miscalibrated critic flags too much before it flags too little,
+which is why its verdict is capped by a "first reaction" and slices stop after
+three review rounds. The hooks match command text; they're guard rails, not a
+security boundary. And unattended means unattended: approve the contract as
+if you won't see the run.
+
+### `taste-profile`
+
+**Your taste is in what you corrected, not in what you'd say if asked.**
+
+Mines your own Claude Code transcripts (`bin/extract-messages.py`, local only,
+masks common token shapes) for the moments you stepped in — "too crowded",
+"why is there a switch for this", "did you actually test this" — and turns
+them into a profile with your reasons and your words. Then it proves the
+profile: a **blind backtest** runs the design critic on screens you already
+judged, without the verdicts, and compares. When it disagrees with an old
+verdict, you re-judge by today's bar — taste moves, and that's usually where
+the unwritten rules surface.
 
 ---
 
