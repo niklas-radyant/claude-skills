@@ -3,7 +3,7 @@
 **For people:** paste this repo's link into Claude, Claude Code, ChatGPT or
 Copilot and say:
 
-> Look at github.com/niklas-radyant/claude-skills and tell me where to start.
+> Read START-HERE.md at github.com/niklas-radyant/claude-skills and tell me where to start.
 
 That's all. The assistant reads this file and takes it from there. Coders
 who want to install everything can skip to [the README](README.md#install).
@@ -12,15 +12,19 @@ who want to install everything can skip to [the README](README.md#install).
 
 ## For the AI assistant reading this
 
-The user pasted this repository's link. Your job is to find the one or two
-places where these skills would make the biggest difference to their work,
-help them start, and not oversell anything. Follow these steps, and reply in
-the language the user writes in.
+The user pasted this repository's link and asked you to read this file. Your
+job: find the one or two places where these skills would make the biggest
+difference to their work, and **get them one real result in this
+conversation**, not just a plan. Don't oversell anything. Reply in the
+language the user writes in, and avoid jargon (skill, repo, plugin) unless
+they use it.
 
-**If a link won't open:** don't guess or build URLs. Give the user the
-GitHub link to the file (swap `raw.githubusercontent.com/niklas-radyant/claude-skills/main/`
-for `github.com/niklas-radyant/claude-skills/blob/main/`) and ask them to
-paste its contents.
+**Links.** Every file in this repo is at
+`https://raw.githubusercontent.com/niklas-radyant/claude-skills/main/<path>`.
+A skill's reference files sit next to its SKILL.md: replace `SKILL.md` in its
+link with `reference/<file>.md`. If a link won't open, say which file you
+couldn't read and carry on with what you have; only a non-coder's last
+resort is "open this link and paste what you see".
 
 ### 1. Know what's here
 
@@ -48,16 +52,25 @@ Use whatever you can actually see, and say what you looked at:
 - **Claude Code or another coding agent:** the current repo, recent
   commits, open branches, `CLAUDE.md` or `AGENTS.md`, and recent sessions if
   you can read them.
-- **ChatGPT:** memory and recent chats if available; project files if
-  you're in a project.
+- **ChatGPT:** what your saved memory and chat-history reference give you.
+  You can't search past chats on request, so say what you remember and
+  don't guess beyond it.
 - **Connected tools** (email, calendar, Slack, CRM, project management):
-  skim recent activity only if already connected, and only for patterns
-  (recurring tasks, repeated requests), not for private details to quote back.
+  only if already connected, and **ask before you look**. Then only for
+  patterns (recurring tasks, repeated requests), never private details to
+  quote back.
 
-If you can see nothing useful, ask three short questions instead:
-1. What do you do every week that feels like it should run by itself?
-2. Where do you most often re-check or redo AI output?
-3. Do you work in code, in documents and tools, or both?
+If you can see little or nothing, don't open with only questions. Give one
+provisional suggestion, marked as a guess (for someone coming from a talk on
+automation, usually: the report or recurring piece of work they redo every
+week or month), then ask:
+1. What do you do every week or month that feels like it should run by itself?
+2. Where do you most often re-check or fix AI output?
+3. What can you set up yourself, and what needs IT or an admin (tools,
+   connectors, data you may use)?
+
+Ask question 3 even when you found plenty: in a company, it decides what a
+first step can be.
 
 ### 3. Recommend, ranked by impact
 
@@ -67,13 +80,23 @@ Give the user **at most three** recommendations, best first. For each:
   the skill does in general is not one.
 - **Why this one first**: time saved, quality gained, or something that
   doesn't happen today.
-- **The first step**, small enough to do in this conversation.
+- **The first step**, small enough to do in this conversation, and one the
+  user can take without anyone else's approval.
 
 Rank by where the user loses the most time each month. In practice:
 - A task they repeat by hand (copying data between tools, the same report
   every month) → `automation-consultant` on that task.
 - Output they re-check or redo by hand (drafts, briefs, analyses that come
   back with the same corrections) → `advisory-board` on that output.
+- Quality depends on who does it (one account manager's reports are great,
+  another's aren't) → `advisory-board` with one shared charter built from
+  the best person's work.
+- AI got the facts wrong (invented issues, made-up numbers) → the fix is
+  data plus a check a script can do, so start with `automation-consultant`.
+  A board alone won't catch it.
+- Their work touches AI search or AEO → say that `automation-consultant`
+  has a worked example for AI-visibility monitoring, including the case
+  where they have no monitoring tool yet.
 - Both? Lead with whichever costs more time, and give the other as #2.
 - A bigger project they keep putting off (a new site, a report, a content
   series) → `afk`, starting with its planning phase.
@@ -83,12 +106,25 @@ Rank by where the user loses the most time each month. In practice:
 - A task no skill fits: say so in one line and offer to help with it
   directly. Don't stretch a skill onto it.
 
-### 4. Offer to start right now
+### 4. Start right now, and finish something
 
 You don't need to install anything to use a skill once: fetch its SKILL.md
-from the links above and follow it in this conversation. If it points to a
-`reference/` file you can't open, carry on without it, or ask the user to
-paste it. Offer this first. Installing is for when they want it every day.
+from the links above and follow it in this conversation. Offer this first.
+Installing is for when they want it every day.
+
+Aim for one real result before the conversation ends, ideally within 15
+minutes. Examples:
+- `advisory-board`: they paste the last thing they wrote; you write the
+  charter with them and return the reviewed, improved version.
+- `automation-consultant`: the plan, plus the first slice done once by hand
+  in this chat (their pasted export turned into this month's report).
+- `afk`: the planning phase for the project they keep putting off, ending in
+  a contract they can hand to an agent or a colleague.
+- `taste-profile`: ten rules from their own corrections, ready to paste into
+  their project instructions.
+
+Then offer to save what you built (charter, plan, profile) as a project file
+or instructions, so their next chat starts from it.
 
 When you hand over to a skill, tell it what you already know (the task the
 user picked, what you learned about their work) so it doesn't ask again.
@@ -100,8 +136,9 @@ Show only the row for the platform the user is on.
 | Where | How |
 |---|---|
 | **Claude Code** | `/plugin marketplace add niklas-radyant/claude-skills`, then `/plugin install automation@niklas-skills` (and `autonomous-work@niklas-skills`, `pr-workflow@niklas-skills` if useful). |
-| **Claude (claude.ai, desktop)** | Download the zip (links below), then Settings → Capabilities → Skills → Upload skill. Needs a paid plan with code execution turned on; on Team and Enterprise plans an admin may have to allow skills first. Uploaded skills are personal to that user. Menu names move around, so check Claude's help center if it's not there (as of October 2026). |
-| **ChatGPT** | Workspace plans with Skills: upload the same zip. Other plans: create a Project, paste the skill's SKILL.md into the project instructions, and add its `reference/` files as project files. |
+| **Claude (claude.ai, desktop)** | Download the zip (links below), then Settings → Capabilities → Skills → Upload skill. Needs a paid plan. If Skills isn't there, the user can forward this to their admin: "Please enable Skills and Code execution and file creation for our organization." Can't install at all? Create a Project, upload SKILL.md and its reference files as project files, and add one instruction: "Follow SKILL.md when I ask for <skill>." Menu names move around (as of October 2026). |
+| **ChatGPT** | Workspace plans with Skills: upload the same zip. Other plans: create a Project, upload SKILL.md and its reference files as project files, and add one instruction: "Follow SKILL.md when I ask for <skill>." |
+| **Microsoft 365 Copilot** (Word, Outlook, Teams) | A different product from GitHub Copilot, with no skill folders. If the tenant allows Copilot agents or notebooks, paste SKILL.md into an agent's instructions or add it to a notebook. |
 | **GitHub Copilot** (VS Code agent mode, Copilot CLI, cloud agent) | Copy the skill folder to `.github/skills/<skill-name>/` in the repo, or `~/.copilot/skills/` for personal use. |
 | **Codex, Cursor, Gemini CLI and other agents** | Most read the same `SKILL.md` format. Copy the folder into the tool's skills directory. Otherwise paste SKILL.md into its rules or instructions file. |
 
@@ -124,7 +161,9 @@ else works anywhere. Say so if the user is elsewhere.
 
 - **Don't oversell.** Each skill has a "where it can be wrong" or "limits"
   section. If the user's situation hits one, say so.
-- **Never ask for or handle credentials** in the chat. If a recommendation
+- **Never ask for or handle credentials** in the chat. Don't ask the user
+  to paste personal or customer data; aggregated numbers and their own
+  writing are fine. If a recommendation
   needs API access, point to a password manager or the tool's own connector.
 - **Be specific to them.** A recommendation that would fit anyone isn't one.
 - **Keep it short.** Three recommendations and a first step beat a tour of

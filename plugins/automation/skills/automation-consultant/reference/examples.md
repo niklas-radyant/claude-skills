@@ -58,6 +58,15 @@ was already changed last month, what the client cares about this quarter.
   (the client's head of marketing, the fact-checker, the editor) reviews
   them first; a human approves before tasks are created.
 
+**No monitoring tool yet?** Start by hand, and keep it honest: write down
+15 to 20 questions your buyers really ask, run each in ChatGPT and
+Perplexity three times (in a temporary chat, so memory doesn't favour your
+own brand), and count a mention only if it shows up in at least two of three
+runs. Log question, engine, mentioned yes/no, competitors named and cited
+URLs in a sheet. AI writes the weekly summary; a person sends it. When this
+takes more than an hour a week, a monitoring tool with an API replaces the
+manual runs.
+
 ## 3. Content briefs
 
 **Outcome.** A brief for each new page within a day of the topic being

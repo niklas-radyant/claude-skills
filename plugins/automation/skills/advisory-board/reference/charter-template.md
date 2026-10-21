@@ -22,6 +22,7 @@ Last updated: <date> by <name>
 
 ## Hard lines (a blocker, every time)
 - <e.g. no number without a source link>
+- <e.g. no finding without the query or row count it came from>
 - <e.g. never name a client without approval>
 - <e.g. no promises about rankings or AI visibility>
 
@@ -33,7 +34,7 @@ Last updated: <date> by <name>
 | <role> | … |
 
 ## Sources the fact-checker may use
-- <where the true numbers live: a report, a dashboard, a folder>
+- <where the true numbers live, in a form the fact-checker can open: an export, a sheet, a folder>
 ```
 
 ## Keeping it alive

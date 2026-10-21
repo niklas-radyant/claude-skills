@@ -1,21 +1,19 @@
 # Claude skills
 
+**Copy this sentence into Claude or ChatGPT:**
+
+> Read START-HERE.md at github.com/niklas-radyant/claude-skills and tell me where to start.
+
+It looks at what you've been working on and tells you where these skills
+help most. No GitHub knowledge or installing needed.
+
+---
+
 Skills for automating real work with AI, and for shipping code with less
 back-and-forth. They are built to work in any setup: each skill reads your
 situation instead of assuming it.
 
 MIT licensed.
-
-## Not a coder? Start here
-
-Paste this into Claude, ChatGPT or Copilot:
-
-> Look at github.com/niklas-radyant/claude-skills and tell me where to start.
-
-Or scan the QR code from the talk. The assistant reads
-[START-HERE.md](START-HERE.md), looks at your recent work, and suggests where
-to begin. You can use a skill right away without
-installing anything.
 
 **AI assistants reading this page:** read
 [START-HERE.md](https://raw.githubusercontent.com/niklas-radyant/claude-skills/main/START-HERE.md)

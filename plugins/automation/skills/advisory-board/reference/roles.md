@@ -24,6 +24,23 @@ proposal is not the same person as for a developer reading docs.
 | **The editor** | Cuts filler, repetition, throat-clearing and AI tells ("in today's fast-paced world", "delve", lists of three for rhythm). Checks the house style. |
 | **The competitor** | Has the best page on this topic open next to it. What do they have that this page doesn't? What would make a reader switch tabs? |
 
+### Technical audits and data analyses
+| Role | Mandate |
+|---|---|
+| **The reproducer** | Re-runs the query or filter behind every finding. A count it can't reproduce is a blocker. |
+| **The client's developer** | Can the client's CMS and stack actually express this fix, and who has to do it? |
+| **The prioritiser** | Is the order by impact on traffic and revenue, or by how easy it was to find? |
+
+### Client reports and recommendations
+| Role | Mandate |
+|---|---|
+| **The client stakeholder who has to act on it** | What do I do on Monday? Is this specific to us, or would every client get the same sentence? |
+| **The data checker** | Every number matches the source export, and month-over-month changes are computed, not estimated. |
+| **The account manager** | Can I defend every line in the call? Does it contradict what we told this client before? |
+
+A shared charter for client reports keeps quality the same across the team,
+whoever writes the report.
+
 ### Briefs and plans for other people to execute
 | Role | Mandate |
 |---|---|

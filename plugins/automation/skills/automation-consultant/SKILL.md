@@ -31,13 +31,17 @@ rough step map, stop asking: draft the plan and mark your assumptions.
 
 ### 1. Start from the outcome, not the task
 
-Get three things before mapping anything:
+Get four things before mapping anything:
 - **The outcome.** What's different when this works? "A brief for every new
   page within a day of the keyword being picked" beats "automate briefs".
 - **Why now.** Time, quality, speed, consistency, or something that doesn't
   happen at all today. This decides what to optimise for.
 - **What was tried, and where it stopped.** This is the most useful answer
   in the whole conversation. Write down the exact point it broke.
+- **Constraints.** Which AI tools and connectors they may use, what data may
+  go into them, and what they can set up themselves versus what needs IT,
+  security or data protection. In a company, design inside these limits and
+  list everything else as a request to whoever decides.
 
 If the user already picked a task (for example in an earlier step of this
 conversation), skip straight to the questions above. If they have no
@@ -60,9 +64,15 @@ Write the process as it really runs today, including the unofficial steps
 Keep it to 5–12 steps. More means you're describing two processes; split
 them and pick one.
 
-If the process repeats per client, product or market, map one instance and
-list what varies between instances. That list becomes a small config or
-context file per instance, and it's usually where the quality comes from.
+If the process repeats per client, product or market (an agency's monthly
+report for 30 clients), map one instance and list what varies between
+instances. That list becomes a context file per instance (goals, priority
+pages, competitors, what was already done, what the client said no to), in
+whatever the team already uses: a Notion page, a Drive doc, a folder in the
+repo. Then the design runs once per instance (in parallel where the runtime
+allows), pilots on one instance first, and returns one summary that shows
+only the exceptions, not 30 reports to read. A shared charter for the
+review keeps quality the same whoever is responsible for the client.
 
 ### 3. Check every step against access, context and guardrails
 
@@ -75,9 +85,10 @@ The common findings, and what to do about them:
 
 | Finding | Usual fix |
 |---|---|
-| Tool has no API or MCP server | Check again (many do now). If not, **switch tools**: a tool that can't be automated is a cost, not a constraint. |
+| Tool has no API or MCP server | Check again (many do now). If not, **switch tools**: a tool that can't be automated is a cost, not a constraint. If the tool isn't the user's to choose, write the business case for whoever owns it, and route around it this week with an export or a system that already holds the data (BI, data warehouse). |
 | Tool has an API, but your automation platform can't use it | Change where the automation runs (step 5), not the tool. |
-| Credentials are personal or scattered | One service account in a password manager the AI can read, holding scoped tokens, revocable in one click. Simpler and fine: the automation platform's own credential store, or the tool's official connector in a chat assistant. |
+| Credentials are personal or scattered | One service account in a password manager the AI can read, holding scoped tokens, revocable in one click. Simpler and fine: the automation platform's own credential store, or the tool's official connector in a chat assistant. In corporate IT, credentials aren't the user's to create: the fix is a request for an approved connector. |
+| The AI invents facts (issues that don't exist, wrong numbers) | Don't let it detect what a query or script can detect. A deterministic step finds and counts; the AI only explains, prioritises and writes, citing the rows it was given. |
 | Knowledge is in someone's head | Write it down once where the AI reads it on every run: project instructions or files in a chat project, a knowledge base, or a `CLAUDE.md` in a repo. |
 | Knowledge changes constantly | Don't copy it; connect the system that owns it (CRM, Slack, email, analytics) and fetch it on each run. |
 | Output can't be trusted unchecked | Add a check: a deterministic test where one exists, an advisory board review where judgement is needed, a human approval only where the risk demands it. |
@@ -111,9 +122,11 @@ would justify the next level ("ten runs in a row with no correction").
 ### 5. Decide where it runs
 
 Pick the runtime by what the steps need, not by what was used last time:
-- **No-code platform** (Zapier, Make, n8n): mostly deterministic steps
-  between tools it has connectors for, maintained by non-developers.
+- **No-code platform** (Zapier, Make, n8n, or what the company already
+  licenses: Power Automate, scheduled BI exports): mostly deterministic
+  steps between tools it has connectors for, maintained by non-developers.
 - **Scheduled AI agent** (a scheduled Claude task or Claude Code routine,
+  ChatGPT scheduled tasks,
   an agent framework): several judgement steps, tools reachable via MCP, and
   output that goes through a check.
 - **Script or scheduled job**: deterministic, high volume, or needs
@@ -128,9 +141,10 @@ Name who maintains it and what it roughly costs per run.
 Mention only the ones that fit this process, with one sentence on why:
 - **`advisory-board`**: when output needs judgement-based review before it
   goes out. The charter it builds is where the user's standards live.
-- **`taste-profile`** (plugin `autonomous-work`, Claude Code): when the user keeps correcting the same things. It
+- **`taste-profile`**: when the user keeps correcting the same things. It
   mines their past corrections into written rules a reviewer can apply.
-- **`afk`** (plugin `autonomous-work`, Claude Code): when a larger piece of work (a site, a feature, a migration)
+- **`afk`**: when a larger piece of work (a site, a report, a content
+  package, a migration)
   should be built in one long autonomous session: all decisions up front,
   then no check-ins.
 - **`pr-preflight`** (plugin `pr-workflow`): when the automation produces code changes that go
@@ -144,14 +158,20 @@ here.
 
 Use [reference/plan-template.md](reference/plan-template.md). The plan ends
 with a **first slice**: the smallest piece that runs end to end on real
-input this week, usually one or two steps at "draft and approve". A plan
-without a first slice is a wish list.
+input this week, usually one or two steps at "draft and approve", and that
+the user can start without anyone else's approval. Dependencies on other
+teams go under blockers, not into the first slice. A plan without a first
+slice is a wish list. If you can, do the first slice once right here in the
+conversation (with their pasted data), so they leave with a result.
 
 For worked examples of how this goes in practice, see
 [reference/examples.md](reference/examples.md).
 
 ## Rules
 
+- **Never let the AI detect what a query can detect.** Finding, counting and
+  comparing are deterministic jobs. The AI explains, prioritises and writes,
+  from the rows it was given. This is the cure for invented findings.
 - **Outcome before tools.** Don't recommend a tool or platform until the
   outcome and the blocking step are clear.
 - **Name the blocker plainly.** "This fails because the hosting provider has

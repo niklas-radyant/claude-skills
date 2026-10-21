@@ -99,8 +99,10 @@ not the effort.
 
 - **If you can start subagents** (Claude Code, the Agent or Task tool, any
   agent framework): one subagent per role, in parallel, each given the
-  output, the charter, the reader and its own mandate (the fact-checker
-  also gets the charter's list of sources). Nothing else.
+  output, the charter, the reader and its own mandate. The fact-checker
+  also gets access to the sources themselves (the export, the crawl, the
+  report), and recomputes numbers instead of checking that a citation
+  exists. Nothing else.
 - **If you can't** (a chat window): write each verdict as its own section,
   in order, and before each one restate the role's mandate and forget the
   previous sections' opinions. This is weaker. Say so in the report.

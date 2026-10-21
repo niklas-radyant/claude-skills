@@ -18,6 +18,9 @@ A step is automatable when all three are ready or fixable.
   service account (1Password, Bitwarden, or similar) that the AI can read,
   holding one vault per area with scoped API tokens. One token to revoke if
   anything goes wrong, nothing pasted into chats or committed to repos.
+  In corporate IT the user usually can't create credentials at all: then
+  the fix is a request for an approved connector, or an export from a
+  system that already holds the data (BI, data warehouse).
 - **If none of this exists:** is there an alternative tool that does the
   same job and can be automated? List the switching cost next to the
   ongoing cost of the manual step.

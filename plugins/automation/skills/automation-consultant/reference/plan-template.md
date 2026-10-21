@@ -36,6 +36,8 @@ someone else could build the first slice from it.
 
 Runtime: <no-code platform | scheduled agent | script | mixed>, maintained by <who>, about <cost> per run.
 Varies per instance (client, market): <list, or "n/a">.
+Per-instance context lives in: <Notion / Drive / repo folder>. Runs fan out by: <client, market>. Same quality across team members via: <shared charter>.
+Needs from IT or others: <approvals, connectors, exports, or "none">.
 
 Autonomy level to start: <assist | draft and approve | run and report | unattended>, because <reason>.
 Move up a level when: <evidence, e.g. "ten runs with no correction">.
