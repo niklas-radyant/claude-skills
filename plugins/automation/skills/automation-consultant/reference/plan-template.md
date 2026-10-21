@@ -50,6 +50,13 @@ Move up a level when: <evidence, e.g. "ten runs with no correction">.
 - Done when: <checkable result>
 - Owner: <name>
 
+## Business case (when a tool, connector or access has to be requested)
+- Today: <runs per month> × <hours per run> = <hours>, done by <role>
+- With it: <hours of review>; setup <days>
+- Cost: <tool price range or internal effort>
+- Data: <what data goes in, where it's processed, who has access>
+- Ask: <the exact approval needed, from whom>
+
 ## Risks
 - <what could go wrong, and how we'd notice>
 ```

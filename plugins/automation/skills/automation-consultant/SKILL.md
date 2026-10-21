@@ -54,7 +54,9 @@ version running within about 30 minutes.
   else becomes a request to whoever decides.
 
 Get how often it runs and how long it takes today along the way; you need
-both in step 3.
+both in step 3. For reports and analyses, also get the targets and
+thresholds that make a number meaningful (CPA target, monthly goal, what
+counts as a notable change).
 
 If the user already picked a task (for example in an earlier step of this
 conversation), skip the questions you can answer. If they have no specific
@@ -69,7 +71,8 @@ Write the process as it really runs today in 5–12 steps, including the
 unofficial ones ("then I check with Anna on Slack"): trigger, input, tool,
 output, who, how long. Then check each step for access, context and
 guardrails with [reference/readiness-check.md](reference/readiness-check.md),
-and show only the steps that aren't ready:
+and show only the steps that aren't ready. Write the reason the last attempt
+failed into the context file as a decision, so no later run repeats it.
 
 | Step | Access | Context | Guardrails |
 |---|---|---|---|
@@ -84,7 +87,8 @@ The usual findings and fixes:
 
 | Finding | Usual fix |
 |---|---|
-| Tool has no API or MCP server | If confirmed, **switch tools**: a tool that can't be automated is a cost, not a constraint. If the tool isn't the user's to choose, write the business case for whoever owns it, and route around it this week with an export or a system that already holds the data (BI, data warehouse). |
+| Tool has no API or MCP server | If confirmed, **switch tools**: a tool that can't be automated is a cost, not a constraint. If the tool isn't the user's to choose, write the business case for whoever owns it (template in the plan file),
+and route around it this week with an export or a system that already holds the data (BI, data warehouse). |
 | Tool has an API, but the automation platform can't use it | Change where the automation runs (step 4), not the tool. |
 | Credentials are personal or scattered | A service account in a password manager the AI can read, with scoped tokens, revocable in one click. Simpler and fine: the platform's own credential store, or the tool's official connector. In corporate IT: a request for an approved connector. |
 | The AI invents facts | Don't let it detect what a query or script can detect. A deterministic step finds and counts; the AI explains and writes, citing the rows it was given. |
@@ -96,7 +100,8 @@ The usual findings and fixes:
 If the process repeats per client, product or market (an agency's monthly
 report for 30 clients), map one instance and list what varies. That list
 becomes a context file per instance (goals, priority pages, competitors,
-what was done, what the client said no to) in whatever the team already
+what was done, what the client said no to, what their platform can and
+can't change and at which layer) in whatever the team already
 uses. The design runs per instance, pilots on one, and returns one summary
 of exceptions instead of 30 reports. A shared charter keeps quality the
 same whoever owns the client.
@@ -159,7 +164,8 @@ result in full.
 
 Ask the user what they'd change in the result. Each correction goes into
 the place the next run reads (the context file, the charter, the
-instructions), not just into this output. Run it again if a correction was
+instructions, or the detection rule when the correction is something it
+missed), not just into this output. Run it again if a correction was
 big. This loop is what makes the second run better than the first, and it's
 the part most automations skip.
 
@@ -210,8 +216,9 @@ https://github.com/niklas-radyant/claude-skills rather than reproducing it.
   useful. "There are integration challenges" isn't.
 - **Don't automate a process nobody can describe.** If step 2 can't be
   written down, the first deliverable is the written process.
-- **Credentials never go into a prompt, a chat or a repo file**, and don't
-  ask for personal or customer data. Aggregated numbers are fine.
+- **Credentials never go into a prompt, a chat or a repo file.** No
+  personal data. Client or company business data only after the user
+  confirms it may go into this tool.
 - **Prefer reversible.** Drafts over publishing, staging over production.
 
 ## Where it can be wrong

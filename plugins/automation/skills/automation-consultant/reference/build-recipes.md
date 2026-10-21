@@ -12,7 +12,9 @@ Works for almost everyone, needs no IT. Give the user three things to paste:
 
 ```
 You produce <the output> for <reader>, every <frequency>.
-Input: I paste <the export / notes / draft>.
+Input: I paste <the export / notes / draft>, plus known events this period
+(launches, budget changes, updates, outages). If I don't give events, ask
+for them before writing.
 Always:
 1. Read context.md first. Use only numbers that are in my input; if a number
    is missing, write [MISSING: ...] instead of estimating.
@@ -26,8 +28,15 @@ Output: <format, length, language>.
 what was decided before and why, terms, per-market or per-client notes.
 Built from the user's answers in this conversation.
 
-**3. `charter.md`** (project file, if a review step is needed): use the
-`advisory-board` charter template.
+**3. `charter.md`** (project file, if a review step is needed): the
+`advisory-board` charter template if it's available, otherwise this:
+
+```
+Reader: <who reads it>. Blocks anything they couldn't act on or repeat.
+Fact-checker: blocks any number, name or date that isn't in the input.
+Hard lines: <two or three things that must never appear>.
+Good looks like: <one example the user liked, and why>.
+```
 
 Then run it once in the project with their real input.
 
@@ -71,7 +80,10 @@ credentials live (never in the script).
 For people who already work in it: a project skill in
 `.claude/skills/<name>/SKILL.md` that holds the procedure, the context file
 next to it, and, for recurring runs, a scheduled routine or a cron job that
-calls it. For a larger build, hand over to `afk` instead.
+calls it. The skill keeps the same rules as the chat recipe: a script
+detects and counts, the model writes only from that output, missing values
+become `[MISSING: ...]`, and a review against the charter runs before the
+result counts as done. For a larger build, hand over to `afk` instead.
 
 ## Checking the first run
 

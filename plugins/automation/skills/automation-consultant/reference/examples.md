@@ -64,11 +64,14 @@ and Google (AI Overviews or AI Mode) three times (in a temporary chat, so memory
 own brand), and count a mention only if it shows up in at least two of three
 runs. Log question, engine, mentioned yes/no, competitors named and cited
 URLs in a sheet. Several markets: write the questions in each market's
-language instead of translating them, and run them with that country's
-location. Sister brands: decide up front whether one of your own brands
+language instead of translating them, and run them from that country: a
+colleague there, or a VPN. Engines guess location roughly, so note how each
+market was run. Sister brands: decide up front whether one of your own brands
 winning counts as a win or a loss. The first slice in a chat is smaller:
 5 questions, one engine, one market, three runs, about 15 minutes. Scale
-up next week. AI writes the weekly summary; a person sends it. When this
+up next week. Label a pilot like that as a method test, not a result: no
+percentages or "share of voice" until there are at least 20 questions per
+market. AI writes the weekly summary; a person sends it. When this
 takes more than an hour a week, a monitoring tool with an API replaces the
 manual runs.
 
