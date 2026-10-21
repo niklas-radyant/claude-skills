@@ -1,6 +1,6 @@
 ---
 name: advisory-board
-description: Self-review before anything ships. Convenes a small board of named roles (for example the skeptical buyer, the editor, the fact-checker), each judging the output separately against written criteria, then revises and reports what changed. Use when the user says "advisory board", "review this before I send it", "self-review", "check this like a critic", "is this good enough", or whenever an automated workflow produces output nobody will look at before it goes out.
+description: Self-review before anything ships, for any role and any kind of output. Convenes a small board of named roles (say the skeptical buyer and the fact-checker), each judging separately against written criteria, then revises and reports what changed. Can also propose standing boards for the user's own job. Use when the user says "set up an advisory board for my work", or when the user says "advisory board", "review this before I send it", "self-review", "check this like a critic", "is this good enough", or whenever an automated workflow produces output nobody will look at before it goes out.
 ---
 
 # Advisory board: let the output face its critics before a human does
@@ -25,11 +25,20 @@ it's the step people skip.
 
 ## Procedure
 
+**Setting up boards for someone's job, not for one output?** Ask what they
+do and which two or three things they produce most often (or look at their
+recent work if you can see it). For each, propose a board: three to five
+roles from [reference/roles.md](reference/roles.md), or new ones written
+for their field, each with a one-line mandate. Let them edit it, then write
+a charter per board (step 2) and offer to save them. After that, use the
+saved board whenever that output comes up. Then stop; the steps below are
+for judging a concrete output.
+
 ### 1. Name the output and its reader
 
 One line each:
-- **What is it?** A landing page, an AEO brief, an email to a client, a
-  deck, a piece of code, a process design.
+- **What is it?** A job ad, a board update, a client email, a lesson plan,
+  a landing page, a piece of code, a process design. Any output works.
 - **Who reads or uses it, and what should they do afterwards?** "A head of
   marketing at a mid-size software company should book a call" is a reader.
   "The audience" isn't.
@@ -58,7 +67,7 @@ Ask for two things, because they carry most of the signal:
   phrases, a competitor's name, promises legal hasn't cleared).
 
 Name the charter after the output type in kebab-case, for example
-`aeo-comparison-page`. Offer to save it so the next run doesn't start from zero: as a
+`client-proposal` or `job-ad`. Offer to save it so the next run doesn't start from zero: as a
 project file in a chat project, as `.claude/board/<output-type>.md` in a
 repo, or as a document the user keeps and pastes next time. In an
 automation, the charter is the part a human maintains; the board runs by

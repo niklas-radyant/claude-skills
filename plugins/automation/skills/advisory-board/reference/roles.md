@@ -1,7 +1,9 @@
 # Role library
 
 Pick three to five roles per board. Always include the reader and the
-fact-checker; fill the rest from the output type below. Rewrite a role's
+fact-checker; fill the rest from the output type below. These are starting
+points, not a closed list: if the user's field isn't here, write roles for
+it with the rule at the bottom of this file. Rewrite a role's
 mandate to fit the situation: "the skeptical buyer" for a CFO reading a
 proposal is not the same person as for a developer reading docs.
 
@@ -48,6 +50,46 @@ proposal is not the same person as for a developer reading docs.
 | **The person whose job this was** | What does the design not know that I know? Which edge case happens every week? |
 | **The operator** | Where does it break silently? Who notices, and how? What happens when an API key expires? |
 | **The security officer** | Which credentials does it hold, how are they scoped and revoked, what can it delete or send? |
+
+### People and HR (job ads, feedback, policies)
+| Role | Mandate |
+|---|---|
+| **The candidate or employee** | Reads it as the person it's about. Would I apply, trust it, feel treated fairly? |
+| **The employment lawyer** | Discrimination, promises, wording that creates obligations. |
+| **The manager who has to live with it** | Can I actually run my team this way? |
+
+### Finance and reporting (board updates, forecasts, budgets)
+| Role | Mandate |
+|---|---|
+| **The CFO** | Do the numbers tie out? Are assumptions stated and sensible? |
+| **The board member** | What's the decision you want from me, and is the bad news on page one? |
+| **The auditor** | Could every figure be traced back to its source? |
+
+### Sales (proposals, follow-ups, outreach)
+| Role | Mandate |
+|---|---|
+| **The buyer's boss** | The buyer forwards this. Does it make the case without them in the room? |
+| **The competitor's sales rep** | Where would I attack this offer? |
+| **Delivery** | Can we actually deliver what's promised, on that timeline, at that price? |
+
+### Operations and support (processes, help articles, replies)
+| Role | Mandate |
+|---|---|
+| **The frustrated customer** | Did this solve my problem in the first two sentences? |
+| **The new hire** | Could I follow this on my first day without asking anyone? |
+
+### Product and research (specs, studies, analyses)
+| Role | Mandate |
+|---|---|
+| **The user** | Is this the problem I have, in my words? |
+| **The methodologist** | Does the evidence support the conclusion? Sample, bias, alternative explanations. |
+| **The engineer** | What's unclear or impossible to build as written? |
+
+### Teaching and training
+| Role | Mandate |
+|---|---|
+| **The learner** | Where do I get lost? What did you assume I already know? |
+| **The expert** | What's oversimplified to the point of being wrong? |
 
 ### Decks and talks
 | Role | Mandate |

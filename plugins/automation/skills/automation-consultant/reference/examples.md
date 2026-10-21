@@ -1,7 +1,9 @@
 # Worked examples
 
-Real processes, shortened. Each shows where the blocker turned out to be,
-which is rarely where people first look.
+Shortened processes from different kinds of work. Each shows where the
+blocker turned out to be, which is rarely where people first look. Examples
+1 to 4 come from real use in a marketing agency; 5 to 7 are typical patterns
+from other functions, written to show the method, not measured results.
 
 ## 1. A new website, from domain idea to indexed page
 
@@ -82,3 +84,53 @@ cited, or when a competitor's page takes its place.
 tool's API: no AI judgement needed for detection, so none is used. AI comes
 in only for the follow-up: comparing the two pages and drafting what to
 change. Detection is deterministic; diagnosis is AI with a check.
+
+## 5. Incoming invoices (finance)
+
+**Outcome.** Every supplier invoice is checked, booked and ready for
+payment approval within a day, without anyone retyping it.
+
+**Where it stopped.** Access: invoices arrive as PDFs in three inboxes, and
+the accounting tool's connector only takes uploads, not email.
+
+**What fixed it.**
+- **Access.** One shared inbox that forwards to the accounting tool's
+  ingest address; the tool's API for reading the extracted fields.
+- **Context.** A list of regular suppliers with expected amounts and cost
+  centres, so outliers stand out.
+- **Guardrails.** Deterministic checks (totals, VAT, duplicate invoice
+  numbers); AI only for assigning the cost centre when it's ambiguous; a
+  human approves every payment. Money is the expensive mistake.
+
+## 6. Interview scheduling and candidate summaries (HR)
+
+**Outcome.** A candidate who passes screening gets interview slots the same
+day, and interviewers get a one-page summary beforehand.
+
+**Where it stopped.** Context and trust: the recruiting tool had an API,
+but nobody wanted AI-written summaries going to hiring managers unchecked,
+and the criteria for each role lived in the hiring manager's head.
+
+**What fixed it.**
+- **Context.** A short scorecard per role, written once with the hiring
+  manager.
+- **Guardrails.** Scheduling runs unattended (reversible, low stakes). The
+  summary goes through an advisory board (the hiring manager, the
+  candidate, the employment lawyer) and only states what's in the CV and
+  screening notes.
+
+## 7. Sales call follow-ups (sales)
+
+**Outcome.** A follow-up email and an updated CRM record within an hour of
+every call.
+
+**Where it stopped.** Access: call recordings were in a meeting tool whose
+transcripts nobody had connected to anything.
+
+**What fixed it.**
+- **Access.** The meeting tool's connector for transcripts, the CRM's
+  connector for writing the record.
+- **Context.** The offer, pricing rules and what was promised to this
+  account before, read from the CRM on every run.
+- **Guardrails.** The CRM update runs on its own. The email is a draft the
+  rep sends, after a board check for promises delivery can't keep.

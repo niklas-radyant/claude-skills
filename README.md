@@ -89,7 +89,10 @@ roles that fit the output) judge it separately against a charter written
 before the draft. Then it revises, re-checks only what was blocked, and
 reports what changed and why. Two rounds at most.
 
-The charter is where your standards live: an example you loved, one you sent
+It isn't tied to one field. Tell it what you do and it proposes boards for
+the things you produce most (job ads, board updates, proposals, help
+articles, code), with roles you can edit. The charter is where your
+standards live: an example you loved, one you sent
 back, and your hard lines. Every time you overrule the board, add a line.
 Works in any chat; with subagents, each role gets its own fresh context.
 
