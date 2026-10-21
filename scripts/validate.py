@@ -14,7 +14,11 @@ from __future__ import annotations
 import json
 import re
 import sys
+import zipfile
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import package  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 MARKETPLACE = ROOT / ".claude-plugin" / "marketplace.json"
@@ -174,6 +178,40 @@ def check_plugin(plugin_dir: Path) -> tuple[str, str] | None:
     return (name or plugin_dir.name, version or "")
 
 
+def check_entry_points() -> None:
+    """Every skill must be findable from START-HERE.md and README.md.
+
+    START-HERE.md is what an assistant reads when someone pastes the repo
+    link; a skill missing there is invisible to everyone who isn't on
+    Claude Code.
+    """
+    for doc in ("START-HERE.md", "README.md"):
+        path = ROOT / doc
+        if not path.is_file():
+            err(f"{doc}: missing")
+            continue
+        text = path.read_text()
+        for skill_dir in package.skill_dirs():
+            if f"`{skill_dir.name}`" not in text:
+                err(f"{doc}: does not mention `{skill_dir.name}`")
+
+
+def check_dist() -> None:
+    """dist/<skill>.zip must match the skill's source exactly."""
+    for skill_dir in package.skill_dirs():
+        zip_path = package.DIST / f"{skill_dir.name}.zip"
+        if not zip_path.is_file():
+            err(f"{rel(zip_path)}: missing — run python3 scripts/package.py")
+            continue
+        with zipfile.ZipFile(zip_path) as z:
+            got = {n: z.read(n) for n in z.namelist()}
+        if got != package.expected_entries(skill_dir):
+            err(
+                f"{rel(zip_path)}: out of date with {rel(skill_dir)} — run "
+                f"python3 scripts/package.py"
+            )
+
+
 def main() -> int:
     marketplace = load_json(MARKETPLACE)
     if marketplace is None:
@@ -243,6 +281,9 @@ def main() -> int:
                 f"{rel(MARKETPLACE)} lists {name!r}, but plugins/{name} "
                 f"does not exist"
             )
+
+    check_entry_points()
+    check_dist()
 
     for w in warnings:
         print(f"warning: {w}")

@@ -31,7 +31,7 @@
       "name": "autonomous-work",
       "source": "./plugins/autonomous-work",
       "description": "Skills for work that runs while you're away: a deep alignment session, then an autonomous run with independent reviewers and a decision log instead of questions (afk), calibrated from your own transcripts and a blind backtest (taste-profile).",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "author": {
         "name": "Niklas Buschner",
         "url": "https://github.com/niklas-radyant"
@@ -46,6 +46,26 @@
         "review",
         "agents",
         "taste"
+      ]
+    },
+    {
+      "name": "automation",
+      "source": "./plugins/automation",
+      "description": "Skills for automating real work with AI: find out what's blocking a process (access, context, guardrails) and design around it (automation-consultant), and let output face a board of critics before a human sees it (advisory-board).",
+      "version": "0.1.0",
+      "author": {
+        "name": "Niklas Buschner",
+        "url": "https://github.com/niklas-radyant"
+      },
+      "license": "MIT",
+      "category": "productivity",
+      "homepage": "https://github.com/niklas-radyant/claude-skills#automation-consultant",
+      "keywords": [
+        "automation",
+        "self-review",
+        "advisory-board",
+        "workflow-design",
+        "aeo"
       ]
     }
   ]

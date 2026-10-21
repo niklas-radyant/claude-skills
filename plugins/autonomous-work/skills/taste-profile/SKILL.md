@@ -1,6 +1,6 @@
 ---
 name: taste-profile
-description: Build or refresh the owner's taste profile (how they judge work, what they always correct, their hard lines) from their own Claude Code transcripts, then prove it with a blind backtest against screens they actually rejected or accepted. Feeds the afk reviewers. Use when the user says "taste profile", "learn how I work", "calibrate the reviewers", "backtest the critic", or before a first /afk run.
+description: Build or refresh the owner's taste profile (how they judge work, what they always correct, their hard lines) from their own past chats (Claude Code transcripts, or a claude.ai or ChatGPT export), then prove it with a blind backtest against work they actually rejected or accepted. Feeds the afk reviewers and any advisory board. Use when the user says "taste profile", "learn how I work", "calibrate the reviewers", "backtest the critic", or before a first /afk run.
 ---
 
 # Taste profile: write down how the owner judges, then prove it
@@ -21,6 +21,22 @@ owner's thinking or only sounds like it does.
 ## Procedure
 
 ### 1. Extract the owner's messages (local only)
+
+**Not on Claude Code?** Ask the owner for a data export of their chats
+(claude.ai: Settings > Privacy > Export data; ChatGPT: Settings > Data
+controls > Export) and run the same script on its `conversations.json`:
+
+```bash
+python3 <this skill>/bin/extract-messages.py --export conversations.json --days 120 --out owner-messages.jsonl
+```
+
+`--match` then filters by conversation title. Export formats change; if the
+script finds no messages, look at the file's structure and adapt. No export
+and no code execution? Ask the owner to paste ten to twenty corrections they
+remember making ("too long", "never say X", "you didn't check Y") with what
+they were correcting. Fewer, but still real.
+
+With Claude Code transcripts:
 
 ```bash
 python3 <this skill>/bin/extract-messages.py --match <repo-or-project-name> --days 120 --out /tmp/owner-messages.jsonl
@@ -68,6 +84,12 @@ quotes and dates:
 Use [reference/profile-template.md](reference/profile-template.md). Write it
 to `~/.claude/afk/profile.md` for use across repos. For cloud runs, or a team
 that shares one owner's bar, write it to `<repo>/.claude/afk/profile.md`.
+Outside Claude Code, give it to the owner as a document to save in their
+project's files or instructions, so every chat in that project reads it.
+
+The profile is not only about screens. For someone who writes, plans or
+analyses, the categories are the same idea: what they cut, what they always
+add, which claims they don't let through, how they want things structured.
 
 Each rule gets three things:
 - what the owner does
@@ -84,12 +106,13 @@ are the places where taste moved.
 ### 4. Backtest, blind
 
 Procedure: [reference/backtest.md](reference/backtest.md).
-1. Collect cases where the owner judged a built screen: rejections and
-   accepted versions.
+1. Collect cases where the owner judged a piece of work (a screen, a text,
+   a plan): rejections and accepted versions.
 2. Copy the screenshots under neutral names so the reviewer can't find the
    verdicts.
-3. Run the design critic on each case and compare its verdicts with the
-   owner's.
+3. Run a reviewer on each case and compare its verdicts with the owner's:
+   the design critic for screens, an `advisory-board` with the profile as
+   its charter for everything else.
 4. Hold some cases out of the profile's examples, so you measure judgement
    rather than recall.
 
