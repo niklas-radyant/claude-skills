@@ -49,7 +49,7 @@ for where to upload it, and for Copilot, Codex and Cursor.
 
 | Skill | Plugin | What it does |
 |---|---|---|
-| [`automation-consultant`](#automation-consultant) | `automation` | Finds out what's blocking a process from being automated (access, context, guardrails) and designs a first slice you can run this week |
+| [`automation-consultant`](#automation-consultant) | `automation` | Finds what's blocking a process from being automated (access, context, guardrails) and builds a first working version with you, run once on your real input |
 | [`advisory-board`](#advisory-board) | `automation` | Lets output face a small board of critics, each judging separately against your written criteria, before a human sees it |
 | [`pr-preflight`](#pr-preflight) | `pr-workflow` | Reviews your diff before you open the PR, runs the checks your CI runs, and fixes what it finds |
 | [`afk`](#afk) | `autonomous-work` | Plans a larger piece of work with you (code, a site, a report, a campaign), then builds it on its own, with independent reviewers instead of check-ins |
