@@ -59,11 +59,16 @@ was already changed last month, what the client cares about this quarter.
   them first; a human approves before tasks are created.
 
 **No monitoring tool yet?** Start by hand, and keep it honest: write down
-15 to 20 questions your buyers really ask, run each in ChatGPT and
-Perplexity three times (in a temporary chat, so memory doesn't favour your
+15 to 20 questions your buyers really ask, run each in ChatGPT, Perplexity
+and Google (AI Overviews or AI Mode) three times (in a temporary chat, so memory doesn't favour your
 own brand), and count a mention only if it shows up in at least two of three
 runs. Log question, engine, mentioned yes/no, competitors named and cited
-URLs in a sheet. AI writes the weekly summary; a person sends it. When this
+URLs in a sheet. Several markets: write the questions in each market's
+language instead of translating them, and run them with that country's
+location. Sister brands: decide up front whether one of your own brands
+winning counts as a win or a loss. The first slice in a chat is smaller:
+5 questions, one engine, one market, three runs, about 15 minutes. Scale
+up next week. AI writes the weekly summary; a person sends it. When this
 takes more than an hour a week, a monitoring tool with an API replaces the
 manual runs.
 

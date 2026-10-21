@@ -22,6 +22,7 @@ proposal is not the same person as for a developer reading docs.
 | **The answer engine** | Could an AI assistant lift a clean, correct answer from this page for the question it targets? Is the answer near the top, stated plainly, with the entity named? |
 | **The searcher** | Typed the question into Google or ChatGPT five seconds ago. Does the first screen answer it, or make them scroll past an intro? |
 | **The editor** | Cuts filler, repetition, throat-clearing and AI tells ("in today's fast-paced world", "delve", lists of three for rhythm). Checks the house style. |
+| **The subject-matter expert** | Tax, legal, medical or technical claims are correct as of today, including deadlines and exceptions. Sourced is not enough; outdated is wrong. |
 | **The competitor** | Has the best page on this topic open next to it. What do they have that this page doesn't? What would make a reader switch tabs? |
 
 ### Technical audits and data analyses

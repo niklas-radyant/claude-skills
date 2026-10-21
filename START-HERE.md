@@ -117,14 +117,17 @@ minutes. Examples:
 - `advisory-board`: they paste the last thing they wrote; you write the
   charter with them and return the reviewed, improved version.
 - `automation-consultant`: the plan, plus the first slice done once by hand
-  in this chat (their pasted export turned into this month's report).
+  in this chat (their pasted export turned into this month's report, or,
+  with no data yet, a small sample they run during the chat).
 - `afk`: the planning phase for the project they keep putting off, ending in
   a contract they can hand to an agent or a colleague.
 - `taste-profile`: ten rules from their own corrections, ready to paste into
   their project instructions.
 
 Then offer to save what you built (charter, plan, profile) as a project file
-or instructions, so their next chat starts from it.
+or instructions, so their next chat starts from it. If someone else writes
+the drafts (freelancers, an agency, a colleague), offer the charter as their
+brief too: fixing the input beats re-checking the output.
 
 When you hand over to a skill, tell it what you already know (the task the
 user picked, what you learned about their work) so it doesn't ask again.
@@ -137,7 +140,7 @@ Show only the row for the platform the user is on.
 |---|---|
 | **Claude Code** | `/plugin marketplace add niklas-radyant/claude-skills`, then `/plugin install automation@niklas-skills` (and `autonomous-work@niklas-skills`, `pr-workflow@niklas-skills` if useful). |
 | **Claude (claude.ai, desktop)** | Download the zip (links below), then Settings → Capabilities → Skills → Upload skill. Needs a paid plan. If Skills isn't there, the user can forward this to their admin: "Please enable Skills and Code execution and file creation for our organization." Can't install at all? Create a Project, upload SKILL.md and its reference files as project files, and add one instruction: "Follow SKILL.md when I ask for <skill>." Menu names move around (as of October 2026). |
-| **ChatGPT** | Workspace plans with Skills: upload the same zip. Other plans: create a Project, upload SKILL.md and its reference files as project files, and add one instruction: "Follow SKILL.md when I ask for <skill>." |
+| **ChatGPT** | Look for Skills in Settings; if it's there, upload the same zip. If not, ask the workspace admin or use a Project: upload SKILL.md and its reference files as project files, and add one instruction: "Follow SKILL.md when I ask for <skill>." |
 | **Microsoft 365 Copilot** (Word, Outlook, Teams) | A different product from GitHub Copilot, with no skill folders. If the tenant allows Copilot agents or notebooks, paste SKILL.md into an agent's instructions or add it to a notebook. |
 | **GitHub Copilot** (VS Code agent mode, Copilot CLI, cloud agent) | Copy the skill folder to `.github/skills/<skill-name>/` in the repo, or `~/.copilot/skills/` for personal use. |
 | **Codex, Cursor, Gemini CLI and other agents** | Most read the same `SKILL.md` format. Copy the folder into the tool's skills directory. Otherwise paste SKILL.md into its rules or instructions file. |

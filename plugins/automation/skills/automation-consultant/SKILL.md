@@ -161,7 +161,8 @@ with a **first slice**: the smallest piece that runs end to end on real
 input this week, usually one or two steps at "draft and approve", and that
 the user can start without anyone else's approval. Dependencies on other
 teams go under blockers, not into the first slice. A plan without a first
-slice is a wish list. If you can, do the first slice once right here in the
+slice is a wish list. In a chat, lead with the readiness table, the
+blockers and the first slice; offer the full plan as a file. If you can, do the first slice once right here in the
 conversation (with their pasted data), so they leave with a result.
 
 For worked examples of how this goes in practice, see

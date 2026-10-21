@@ -65,6 +65,9 @@ Ask for two things, because they carry most of the signal:
   corrections beat adjectives like "clean" and "on-brand".
 - **Their hard lines**: what must never appear (made-up numbers, certain
   phrases, a competitor's name, promises legal hasn't cleared).
+- **Where the truth lives**: the sources the fact-checker may trust (laws,
+  official guidance, an export, an internal expert). Without them, claims
+  on regulated topics get flagged, not confirmed.
 
 Name the charter after the output type in kebab-case, for example
 `client-proposal` or `job-ad`. Offer to save it so the next run doesn't start from zero: as a
@@ -105,7 +108,8 @@ not the effort.
   exists. Nothing else.
 - **If you can't** (a chat window): write each verdict as its own section,
   in order, and before each one restate the role's mandate and forget the
-  previous sections' opinions. This is weaker. Say so in the report.
+  previous sections' opinions. Keep each verdict to three lines, with full
+  detail only for blockers. This is weaker. Say so in the report.
 
 Each role returns, in this shape:
 
