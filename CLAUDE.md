@@ -13,6 +13,8 @@ plugins/<theme>/
     ├── SKILL.md                  # always read when the skill fires
     └── reference/                # loaded only when SKILL.md sends the model there
 scripts/validate.py               # run before pushing; CI runs it on every PR
+scripts/package.py                # builds dist/<skill>.zip for claude.ai and ChatGPT uploads
+START-HERE.md                     # read by an assistant when someone pastes the repo link
 templates/SKILL.md                # starting point for a new skill
 ```
 
@@ -32,11 +34,17 @@ templates/SKILL.md                # starting point for a new skill
    step that gets forgotten — the validator fails on drift, which is why it
    exists.
 5. Add a row to the catalog table in `README.md`, and a section below it.
-6. Validate:
+   Add it to the table in `START-HERE.md` too, with where it works and its
+   raw link. That file is what an assistant reads when someone pastes the
+   repo link, so a skill missing there doesn't exist for non-coders.
+6. Rebuild the upload zips and validate:
 
 ```bash
-python3 scripts/validate.py && claude plugin validate .
+python3 scripts/package.py && python3 scripts/validate.py && claude plugin validate .
 ```
+
+The validator fails if a zip in `dist/` doesn't match its source, or if a
+skill is missing from `START-HERE.md` or `README.md`.
 
 ## Adding a new plugin
 

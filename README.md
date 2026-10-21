@@ -1,15 +1,32 @@
-# Claude Code skills
+# Claude skills
 
-A small set of Claude Code skills for shipping code with less back-and-forth.
-They are built to work in any repo: each skill reads your setup instead of
-assuming it.
+Skills for automating real work with AI, and for shipping code with less
+back-and-forth. They are built to work in any setup: each skill reads your
+situation instead of assuming it.
 
 MIT licensed.
+
+## Not a coder? Start here
+
+Paste this into Claude, ChatGPT or Copilot:
+
+> Look at https://github.com/niklas-radyant/claude-skills and read START-HERE.md.
+> Based on what I've been working on recently, where would these skills help me
+> most, and where should I start?
+
+The assistant reads [START-HERE.md](START-HERE.md), looks at your recent
+work, and suggests where to begin. You can use a skill right away without
+installing anything.
+
+**AI assistants reading this page:** read
+[START-HERE.md](https://raw.githubusercontent.com/niklas-radyant/claude-skills/main/START-HERE.md)
+first and follow it.
 
 ## Install
 
 ```bash
 /plugin marketplace add niklas-radyant/claude-skills
+/plugin install automation@niklas-skills
 /plugin install pr-workflow@niklas-skills
 /plugin install autonomous-work@niklas-skills
 ```
@@ -27,13 +44,54 @@ cp -r claude-skills/plugins/pr-workflow/skills/pr-preflight ~/.claude/skills/
 
 This works with any agent tool that reads `SKILL.md` files.
 
+**On claude.ai or ChatGPT?** Each skill is also in [`dist/`](dist) as a zip
+you can upload. See [START-HERE.md](START-HERE.md#5-help-them-install-it-where-they-work)
+for where to upload it, and for Copilot, Codex and Cursor.
+
 ## The skills
 
 | Skill | Plugin | What it does |
 |---|---|---|
+| [`automation-consultant`](#automation-consultant) | `automation` | Finds out what's blocking a process from being automated (access, context, guardrails) and designs a first slice you can run this week |
+| [`advisory-board`](#advisory-board) | `automation` | Lets output face a small board of critics, each judging separately against your written criteria, before a human sees it |
 | [`pr-preflight`](#pr-preflight) | `pr-workflow` | Reviews your diff before you open the PR, runs the checks your CI runs, and fixes what it finds |
 | [`afk`](#afk) | `autonomous-work` | Plans a task with you, then builds it on its own, with independent reviewers instead of check-ins |
 | [`taste-profile`](#taste-profile) | `autonomous-work` | Learns how you judge work from your past transcripts and tests that it got it right |
+
+---
+
+### `automation-consultant`
+
+**Most automations fail on access, context or guardrails, not on the AI.**
+
+It starts from the outcome you want, maps the process as it really runs,
+and checks every step for three things: can the AI reach the tool and data
+(access), does it know what a good person doing this step would know
+(context), and would you trust the result without re-checking everything
+(guardrails). Then it proposes a design, an autonomy level to start at, and
+a first slice to run on real input this week.
+
+It will tell you when the answer is to switch tools. A tool without an API
+is a cost, not a constraint.
+
+Reference files: a readiness check per pillar, a one-page plan template,
+and worked examples (a website from domain idea to indexed page, AEO
+monitoring, briefs, citation checks).
+
+---
+
+### `advisory-board`
+
+**One reviewer agrees with the writer. A board disagrees usefully.**
+
+Three to five named roles (always the real reader and a fact-checker, plus
+roles that fit the output) judge it separately against a charter written
+before the draft. Then it revises, re-checks only what was blocked, and
+reports what changed and why. Two rounds at most.
+
+The charter is where your standards live: an example you loved, one you sent
+back, and your hard lines. Every time you overrule the board, add a line.
+Works in any chat; with subagents, each role gets its own fresh context.
 
 ---
 

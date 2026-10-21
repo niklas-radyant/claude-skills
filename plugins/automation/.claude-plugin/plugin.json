@@ -1,0 +1,12 @@
+{
+  "name": "automation",
+  "version": "0.1.0",
+  "description": "Skills for automating real work with AI: find out what's blocking a process and design around it (automation-consultant), and let output face a board of critics before a human sees it (advisory-board).",
+  "author": {
+    "name": "Niklas Buschner",
+    "url": "https://github.com/niklas-radyant"
+  },
+  "repository": "https://github.com/niklas-radyant/claude-skills",
+  "license": "MIT",
+  "keywords": ["automation", "self-review", "advisory-board", "workflow-design", "aeo"]
+}
