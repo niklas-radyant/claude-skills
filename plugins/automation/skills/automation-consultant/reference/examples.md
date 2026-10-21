@@ -2,8 +2,9 @@
 
 Shortened processes from different kinds of work. Each shows where the
 blocker turned out to be, which is rarely where people first look. Examples
-1 to 4 come from real use in a marketing agency; 5 to 7 are typical patterns
-from other functions, written to show the method, not measured results.
+1 to 4 and 8 come from real use in a marketing agency; 5 to 7 are typical
+patterns from other functions, written to show the method, not measured
+results.
 
 ## 1. A new website, from domain idea to indexed page
 
@@ -151,3 +152,35 @@ transcripts nobody had connected to anything.
   account before, read from the CRM on every run.
 - **Guardrails.** The CRM update runs on its own. The email is a draft the
   rep sends, after a board check for promises delivery can't keep.
+
+## 8. A podcast, from guest booking to promotion (real use)
+
+**Outcome.** Everything around a recording runs without the host doing it
+by hand: preparation, filing, publishing on the podcast host and YouTube,
+and the promotion. The host does the conversation, an editor does the cut.
+
+**Steps.** Research the guest and write the interview outline → set up a
+private page for the guest → after recording, confirm the guest's title,
+get a high-resolution photo, send the recording to the editor → when the
+edit is up, pull the transcript, write titles, show notes and chapters,
+make the thumbnail and cover → write it all to the podcast host and YouTube
+→ publish → draft social posts in the guest's own voice and an email to
+the guest.
+
+**Where it stopped.** Spread across tools with separate logins, and every
+episode depended on the host remembering a long list of details.
+
+**What fixed it.**
+- **Access.** The podcast host's API, the YouTube API (OAuth), Google Docs
+  and Gmail connectors, a scraper for the guest's recent posts, all keys
+  from one password manager service account.
+- **Context.** The host's angle for the episode in their own words, a
+  dossier on the guest, the transcript, every promise made on air (so the
+  description includes the link that was promised), and the guest's last
+  60 posts to match their writing style.
+- **Guardrails.** Split into three skills, one per phase, each writing to a
+  shared episode file the next one reads. Every write runs dry first. One
+  briefing in the chat shows all copy and artwork together, and nothing
+  goes public without an explicit yes. Every mistake became a rule: an
+  episode once went out with no playable audio, so publishing now refuses
+  until the audio is encoded.
