@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Extract what the human actually typed from Claude Code transcripts.
+"""Extract what the human actually typed from Claude Code transcripts, or
+from a claude.ai or ChatGPT data export.
 
 Claude Code stores every session as JSONL under ~/.claude/projects/<dir>/.
 This pulls the human's own messages (not tool results, not system reminders,
@@ -8,10 +9,16 @@ each one, so corrections can be read in context.
 
     python3 extract-messages.py --match <project-name-substring> [--days 120] \
         [--out messages.jsonl] [--max-chars 3000]
+    python3 extract-messages.py --export <path/to/conversations.json> \
+        [--match <title-substring>] [--days 120] [--out messages.jsonl]
 
 --match selects transcript directories whose name contains the substring
-(worktree sessions of the same repo usually share it). Output: one JSON
-object per message, oldest first: {ts, session, text, before, long}.
+(worktree sessions of the same repo usually share it). With --export it
+filters conversations by title instead, and is optional. --export reads the
+conversations.json from a claude.ai export (Settings > Privacy > Export
+data) or a ChatGPT export (Settings > Data controls > Export); the format is
+detected. Output: one JSON object per message, oldest first:
+{ts, session, text, before, long}.
 
 Everything stays local. Transcripts can contain secrets and personal data;
 the script masks common token shapes, but read the output before sharing it.
@@ -24,6 +31,7 @@ import json
 import re
 import sys
 import time
+from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path.home() / ".claude" / "projects"
@@ -70,15 +78,91 @@ def human_texts(rec: dict) -> list[str]:
     return [t for t in out if t and t.strip() and not NOISE.match(t)]
 
 
+def _epoch(ts) -> float:
+    if isinstance(ts, (int, float)):
+        return float(ts)
+    if isinstance(ts, str) and ts:
+        try:
+            return datetime.fromisoformat(ts.replace("Z", "+00:00")).timestamp()
+        except ValueError:
+            pass
+    return 0.0
+
+
+def _iso(ts) -> str:
+    e = _epoch(ts)
+    return datetime.fromtimestamp(e, timezone.utc).isoformat() if e else ""
+
+
+def export_turns(conv: dict):
+    """(role, text, ts) for one conversation, oldest first, either format."""
+    if "chat_messages" in conv:  # claude.ai
+        for m in conv.get("chat_messages") or []:
+            t = m.get("text") or text_of(m.get("content"))
+            yield ("user" if m.get("sender") == "human" else "assistant", t, m.get("created_at", ""))
+        return
+    nodes = [n.get("message") for n in (conv.get("mapping") or {}).values()]  # ChatGPT
+    nodes = [m for m in nodes if m and (m.get("content") or {}).get("parts")]
+    for m in sorted(nodes, key=lambda m: m.get("create_time") or 0):
+        parts = [p for p in m["content"]["parts"] if isinstance(p, str)]
+        role = (m.get("author") or {}).get("role")
+        if role in ("user", "assistant"):
+            yield (role, "\n".join(parts), m.get("create_time") or 0)
+
+
+def from_export(a, cutoff: float) -> list[dict]:
+    convs = json.loads(Path(a.export).read_text())
+    rows, seen = [], set()
+    for conv in convs:
+        title = conv.get("name") or conv.get("title") or ""
+        if a.match and a.match.lower() not in title.lower():
+            continue
+        last_assistant = ""
+        for role, t, ts in export_turns(conv):
+            if role == "assistant":
+                last_assistant = t or last_assistant
+                continue
+            if not t or not t.strip() or _epoch(ts) < cutoff:
+                continue
+            key = t.strip()[:200]
+            if key in seen:
+                continue
+            seen.add(key)
+            rows.append(
+                {
+                    "ts": _iso(ts),
+                    "session": title[:60],
+                    "text": SECRET.sub("«masked»", t[: a.max_chars]),
+                    "long": len(t) > a.max_chars,
+                    "before": SECRET.sub("«masked»", last_assistant[-600:]),
+                }
+            )
+    return rows
+
+
+def write(rows: list[dict], out_path: str, source: str) -> None:
+    rows.sort(key=lambda r: r["ts"])
+    out = sys.stdout if out_path == "-" else open(out_path, "w")
+    for r in rows:
+        out.write(json.dumps(r, ensure_ascii=False) + "\n")
+    print(f"{len(rows)} messages from {source}", file=sys.stderr)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--match", required=True)
+    ap.add_argument("--match")
+    ap.add_argument("--export", help="conversations.json from a claude.ai or ChatGPT export")
     ap.add_argument("--days", type=int, default=120)
     ap.add_argument("--out", default="-")
     ap.add_argument("--max-chars", type=int, default=3000)
     a = ap.parse_args()
 
     cutoff = time.time() - a.days * 86400
+    if a.export:
+        write(from_export(a, cutoff), a.out, a.export)
+        return 0
+    if not a.match:
+        ap.error("--match is required unless --export is given")
     files = [
         f
         for d in ROOT.iterdir()
@@ -118,11 +202,7 @@ def main() -> int:
                             "before": SECRET.sub("«masked»", last_assistant[-600:]),
                         }
                     )
-    rows.sort(key=lambda r: r["ts"])
-    out = sys.stdout if a.out == "-" else open(a.out, "w")
-    for r in rows:
-        out.write(json.dumps(r, ensure_ascii=False) + "\n")
-    print(f"{len(rows)} messages from {len(files)} transcripts", file=sys.stderr)
+    write(rows, a.out, f"{len(files)} transcripts")
     return 0
 
 

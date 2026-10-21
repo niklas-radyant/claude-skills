@@ -10,12 +10,11 @@ MIT licensed.
 
 Paste this into Claude, ChatGPT or Copilot:
 
-> Look at https://github.com/niklas-radyant/claude-skills and read START-HERE.md.
-> Based on what I've been working on recently, where would these skills help me
-> most, and where should I start?
+> Look at github.com/niklas-radyant/claude-skills and tell me where to start.
 
-The assistant reads [START-HERE.md](START-HERE.md), looks at your recent
-work, and suggests where to begin. You can use a skill right away without
+Or scan the QR code from the talk. The assistant reads
+[START-HERE.md](START-HERE.md), looks at your recent work, and suggests where
+to begin. You can use a skill right away without
 installing anything.
 
 **AI assistants reading this page:** read
@@ -55,8 +54,8 @@ for where to upload it, and for Copilot, Codex and Cursor.
 | [`automation-consultant`](#automation-consultant) | `automation` | Finds out what's blocking a process from being automated (access, context, guardrails) and designs a first slice you can run this week |
 | [`advisory-board`](#advisory-board) | `automation` | Lets output face a small board of critics, each judging separately against your written criteria, before a human sees it |
 | [`pr-preflight`](#pr-preflight) | `pr-workflow` | Reviews your diff before you open the PR, runs the checks your CI runs, and fixes what it finds |
-| [`afk`](#afk) | `autonomous-work` | Plans a task with you, then builds it on its own, with independent reviewers instead of check-ins |
-| [`taste-profile`](#taste-profile) | `autonomous-work` | Learns how you judge work from your past transcripts and tests that it got it right |
+| [`afk`](#afk) | `autonomous-work` | Plans a larger piece of work with you (code, a site, a report, a campaign), then builds it on its own, with independent reviewers instead of check-ins |
+| [`taste-profile`](#taste-profile) | `autonomous-work` | Learns how you judge work from your past chats and tests that it got it right |
 
 ---
 
@@ -164,9 +163,15 @@ It works best with a **profile** (how you judge work, made with
 `taste-profile`) and a per-repo **adapter** (where the product vision lives,
 how to verify). Runs locally or in a cloud session; see `reference/cloud.md`.
 
+**Not only for code.** The same three phases work for a report, a content
+package, a campaign or a strategy document: the reviewers become an advisory
+board, and "verified" means read cold, every fact sourced. See
+`reference/non-code.md`. The planning phase alone is worth running in any
+chat.
+
 **Limits.** The reviewers are only as good as your profile. The hooks are
 guard rails, not a security boundary. Approve the contract as if you won't
-see the run. Still early (0.1.0), so bug reports from different repos are
+see the run. Still early (0.2.0), so bug reports from different repos are
 welcome.
 
 ---
@@ -175,10 +180,11 @@ welcome.
 
 **Your taste is in what you corrected, not in what you'd say if asked.**
 
-It scans your local Claude Code transcripts for the moments you stepped in
-("too crowded", "did you actually test this") and turns them into a profile
-in your own words. Then it tests the profile with a **blind backtest**: the
-design critic judges screens you already judged, without seeing your
+It scans your past chats for the moments you stepped in ("too crowded",
+"did you actually test this", "never open like that") and turns them into a
+profile in your own words. It reads Claude Code transcripts, or a data
+export from claude.ai or ChatGPT. Then it tests the profile with a **blind
+backtest**: a reviewer judges work you already judged, without seeing your
 verdicts, and the results are compared.
 
 ---

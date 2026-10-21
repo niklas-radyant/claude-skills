@@ -31,7 +31,7 @@
       "name": "autonomous-work",
       "source": "./plugins/autonomous-work",
       "description": "Skills for work that runs while you're away: a deep alignment session, then an autonomous run with independent reviewers and a decision log instead of questions (afk), calibrated from your own transcripts and a blind backtest (taste-profile).",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "author": {
         "name": "Niklas Buschner",
         "url": "https://github.com/niklas-radyant"

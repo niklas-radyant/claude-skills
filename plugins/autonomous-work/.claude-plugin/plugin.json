@@ -1,6 +1,6 @@
 {
   "name": "autonomous-work",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Skills for work that runs while you're away: align deeply up front, then an autonomous run to an agreed milestone with independent reviewers instead of check-ins (afk), calibrated against your own past judgements (taste-profile).",
   "author": {
     "name": "Niklas Buschner",
@@ -8,5 +8,12 @@
   },
   "repository": "https://github.com/niklas-radyant/claude-skills",
   "license": "MIT",
-  "keywords": ["autonomous", "afk", "long-running", "review", "agents", "taste"]
+  "keywords": [
+    "autonomous",
+    "afk",
+    "long-running",
+    "review",
+    "agents",
+    "taste"
+  ]
 }

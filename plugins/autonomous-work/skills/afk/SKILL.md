@@ -1,6 +1,6 @@
 ---
 name: afk
-description: AFK mode. A deep alignment session with you, then a fully autonomous run to an agreed milestone, with independent reviewers instead of check-ins and a decision log instead of questions. One command, /afk, picks the phase from the run state (plan, go, learn). Use when the user says "afk", "I'll be away", "work through this on your own", "run this autonomously until X", or wants a work package built while they're gone.
+description: AFK mode. A deep alignment session with you, then a fully autonomous run to an agreed milestone, with independent reviewers instead of check-ins and a decision log instead of questions. Works for code and for other large work (a report, a content package, a campaign). One command, /afk, picks the phase from the run state (plan, go, learn). Use when the user says "afk", "I'll be away", "work through this on your own", "run this autonomously until X", or wants a work package built while they're gone.
 argument-hint: "[topic for a new run]"
 ---
 
@@ -23,6 +23,11 @@ AFK mode splits the work into three phases:
   rule and logged, or parked for later.
 - **Learn.** The owner's corrections after the run become rules, so the next
   run needs fewer of them.
+
+**Not code?** The same three phases work for a report, a content package,
+a campaign or a strategy document. What changes (where files live, how to
+verify, which reviewers) is in [reference/non-code.md](reference/non-code.md).
+Read it first, then follow the phases below with those substitutions.
 
 ## Files
 
